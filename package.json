@@ -1,0 +1,41 @@
+{
+  "name": "crunchr",
+  "version": "0.0.3",
+  "description": "An experimental virtual machine running on adaptive neuronal networks. Built of an official research-project.",
+  "main": "build/main/run.js",
+  "dependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "chalk": "^3.0.0",
+    "crunchr": "0.0.3",
+    "readline-sync": "^1.2.22"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.2.0",
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "build": "babel src --source-maps --out-dir build",
+    "repl": "node build/main/run.js",
+    "test": "mocha --recursive build/test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timo-cmd/crunchr.org#readme.md"
+  },
+  "keywords": [
+    "crunchr",
+    "parser",
+    "tokenizer",
+    "type-checking",
+    "interpreter",
+    "Neuronal networks",
+    "vm",
+    "research"
+  ],
+  "author": "Timo Sarkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "http://gitub.com/timo-cmd/crunchr"
+  },
+  "homepage": "http://gitub.com/timo-cmd/crunchr"
+}

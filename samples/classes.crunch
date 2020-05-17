@@ -1,0 +1,8 @@
+
+
+
+class Employee(firstname: String, lastname: String, company: String) extends Person(firstname, lastname) {
+    func company(): String = company
+    func setCompany(c: String) = company = c
+}
+

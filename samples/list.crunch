@@ -1,0 +1,144 @@
+/// A simple linked-list implementation in crunchr.
+
+    var head: Node = new Node("head")
+
+    func add(e: Object): List = {
+        head.add(e)
+        this
+    }
+
+    func size(): Int = if (head.next() == null) 0 else head.next().size()
+
+    func isEmpty(): Bool = head.next() == null
+
+    func get(index: Int): Object = if (head.next() == null) null else head.next().get(index)
+
+    func set(index: Int, e: Object) = if (head.next() != null) head.next().set(index, e)
+
+    func indexOf(e: Object): Int = if (head.next() == null) -1 else head.next().indexOf(e)
+
+    func removeAt(index: Int): Object = if (index == 0) removeFront() else head.next().removeAt(index)
+
+    private func removeFront(): Object = {
+        if (head.next() == null) null
+        else {
+            let data = head.next().data() in {
+                head.setNext(head.next().next())
+                data
+            }
+        }
+    }
+
+    override func toString(): String = if (head.next() == null) "[]" else head.next().toString()
+}
+
+class Node(data: Object) {
+    var next: Node = null
+
+    func data(): Object = data
+
+    func setData(e: Object) = data = e
+
+    func next(): Node = next
+
+    func setNext(n: Node) = next = n
+
+    func add(e: Object): Node = {
+        let node = this in {
+            while (node.next() != null)
+                node = node.next()
+
+            node.setNext(new Node(e))
+        }
+        this
+    }
+
+    func get(index: Int): Object = {
+        if (index < 0) null
+        else {
+            let i = 0, node = this in {
+                while (i < index && node != null) {
+                    i += 1
+                    node = node.next()
+                }
+
+                if (node != null) node.data() else null
+            }
+        }
+    }
+
+    func set(index: Int, e: Object) = {
+        if (index >= 0) {
+            let i = 0, node = this in {
+                while (i < index && node != null) {
+                    i += 1
+                    node = node.next()
+                }
+
+                if (node != null)
+                    node.setData(e)
+            }
+        }
+    }
+
+    func removeAt(index: Int): Object = {
+        if (index < 0) null
+        else {
+            let i = 0, node = this in {
+                while (i < index - 1 && node != null) {
+                    i += 1
+                    node = node.next()
+                }
+
+                removeNext(node)
+            }
+        }
+    }
+
+    func indexOf(e: Object): Int = {
+        if (e == null) -1
+        else {
+            let index = 0, node = this in {
+                while (node != null && node.data() != e) {
+                    index += 1
+                    node = node.next()
+                }
+
+                if (node == null) -1 else index
+            }
+        }
+    }
+
+    func size(): Int = {
+        let size = 0, node = this in {
+            while (node != null) {
+                size += 1
+                node = node.next()
+            }
+
+            size
+        }
+    }
+
+    private func removeNext(node: Node): Object = {
+        if (node == null) null
+        else {
+            if (node.next() != null) {
+                let data = node.next().data() in {
+                    node.setNext(node.next().next())
+                    data
+                }
+            }
+        }
+    }
+
+    override func toString(): String = {
+        let str = "[", node = this in {
+            while (node.next() != null) {
+                str += node.data() + ", "
+                node = node.next()
+            }
+
+            str + node.data() + "]"
+        }
+    }

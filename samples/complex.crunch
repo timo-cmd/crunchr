@@ -1,0 +1,62 @@
+// A class for handling complex numbers in crunchr.
+class Complex(real: Int, im: Int) {
+    func real(): Int = rea
+    func setReal(r: Int) = real = r
+    func im(): Int = im
+    func setIm(i: Int) = im = i
+
+    // We are redefining the + operation for our Complex class.
+    // Thanks to this function, we can evaluate expressions like
+    // new Complex(1, 2) + new Complex(3, 4) in the interpreter.
+    func +(that: Complex): Complex = new Complex(real + that.real(), im + that.im())
+
+    // Redefines the - operation for Complex.
+    func -(that: Complex): Complex = new Complex(real - that.real(), im - that.im())
+
+    // Redefines the * operation for our Complex class.
+    func *(that: Complex): Complex = new Complex(
+            real * that.real() - im * that.im(),
+            real * that.im() + im * that.real()
+        )
+
+    // Redefines the / operation for Complex.
+    func /(that: Complex): Complex = {
+        let den = that.real() * that.real() + that.im() * that.im() in {
+            new Complex(
+                (real * that.real() + im * that.im()) / den,
+                (im * that.real() - real * that.im()) / den
+            )
+        }
+    }
+
+    // All classes in crunchr automatically extends the Object class which
+    // already redefine the == operator to implement object equality.
+    // Here, we are overriding Object's == definition to customize how
+    // Complex objects are tested for equality.
+    override func ==(that: Object): Bool = {
+        // The instanceOf() function checks if an object
+        // is an instance of the specified type.
+        if (!that.instanceOf("Complex"))
+            false
+        else {
+            // The as keyword is used to cast an object of one type
+            // to another type.
+            let complex = that as Complex in {
+                real == complex.real() && im == complex.im()
+            }
+        }
+    }
+
+    // Overrides Object's toString() method to customize how Complex objects
+    // are converted to string and printed in the interpreter.
+    override func toString(): String = {
+        if (real == 0 && im == 0) "0"
+        else {
+            if (real == 0) im + "i"
+            else {
+                if (im == 0) real.toString()
+                else real + (if (im < 0) " - " + (-im) else " + " + im) + "i"
+            }
+        }
+    }
+}
