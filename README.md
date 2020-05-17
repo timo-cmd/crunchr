@@ -1,4 +1,4 @@
-  Crunchr
+  ## Crunchr
    
    Crunchr - A class-based language runtime that is implemented and evaluated using neuronal network patterns. 
    Submission project for the SIGMA compiler conference 2021
