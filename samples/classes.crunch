@@ -1,4 +1,4 @@
-
+// simple class implementation using scala'ish syntax
 
 
 class Employee(firstname: String, lastname: String, company: String) extends Person(firstname, lastname) {
